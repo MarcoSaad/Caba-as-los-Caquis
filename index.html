@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<!-- Avisa al navegador que es HTML5 -->
+<html lang="es">
+<!-- Raíz de la página; lang="es" = contenido en español -->
+
+<head>
+  <meta charset="UTF-8">
+  <!-- Permite tildes y ñ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Imprescindible para que la página sea responsive (se adapte al celular) -->
+  <title>Cabañas Los Caquis | Alquiler en el Delta de Tigre</title>
+  <!-- Título de la pestaña y de Google -->
+  <meta name="description" content="Cabañas Los Caquis: alquiler de cabañas para 2 personas en el Delta de Tigre. Tranquilidad y naturaleza.">
+  <!-- Resumen que muestra Google -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Abre la conexión con Google Fonts por adelantado (carga más rápida) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Idem para el servidor que entrega los archivos de la tipografía -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Tipografía elegante para los títulos (la de tu página actual se parece a esta) -->
+
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Conecta los estilos -->
+  <script src="js/main.js" defer></script>
+  <!-- Conecta el JavaScript. "defer" = se ejecuta recién cuando el HTML terminó de cargar -->
+</head>
+
+<body>
+
+  <!-- ================= CABECERA / MENÚ ================= -->
+  <header class="cabecera" id="cabecera">
+    <!-- Barra fija arriba. JavaScript le agrega la clase "con-fondo" al scrollear -->
+    <a href="#inicio" class="logo">LOS CAQUIS</a>
+    <!-- Logo en texto; después se puede cambiar por una imagen -->
+
+    <button class="hamburguesa" id="botonMenu" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+      <!-- Botón de 3 rayitas, solo visible en celular. aria-* ayuda a lectores de pantalla -->
+      <span></span><span></span><span></span>
+      <!-- Cada <span> es una rayita -->
+    </button>
+
+    <nav class="menu" id="menu">
+      <!-- Menú de navegación -->
+      <a href="#inicio">Inicio</a>
+      <a href="#cabanas">Cabañas</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+      <!-- Cada enlace salta a la sección con ese id -->
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ================= 1) INICIO (HERO) ================= -->
+    <section class="hero" id="inicio">
+      <div class="foto hero__fondo" data-nombre="hero.jpg · Foto principal">
+        <!-- Contenedor de la foto de fondo. data-nombre = cartel que se ve mientras no haya imagen -->
+        <img src="img/hero.jpg" alt="Cabaña entre los árboles en el Delta" onerror="this.remove()">
+        <!-- Si la imagen no existe todavía, onerror la elimina y queda el recuadro verde -->
+      </div>
+      <div class="hero__velo"></div>
+      <!-- Capa oscura sobre la mitad izquierda para que el texto se lea -->
+      <div class="hero__contenido">
+        <p class="hero__lugar">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          <!-- Ícono de ubicación dibujado con SVG (no pesa nada y se escala sin perder calidad) -->
+          Acá estamos
+        </p>
+        <h1>Una Experiencia Única</h1>
+        <!-- Único <h1> de la página (importa para Google) -->
+        <a href="#contacto" class="boton">Contactanos</a>
+      </div>
+    </section>
+
+    <!-- ================= 2) NOSOTROS ================= -->
+    <section class="nosotros" id="nosotros">
+      <div class="nosotros__texto aparecer">
+        <!-- Clase "aparecer" = JavaScript la anima cuando entra en pantalla -->
+        <h2>¿Quiénes somos?</h2>
+        <p>
+          Cabañas Los Caquis es un predio atendido por su dueño las 24 hs.
+          Estamos ubicados en Arroyo Espera 815, a 70 minutos en lancha colectivo
+          o 20 minutos en lancha taxi.
+        </p>
+      </div>
+      <div class="nosotros__imagen aparecer">
+        <div class="nosotros__bloque"></div>
+        <!-- Bloque verde decorativo que queda detrás de la foto -->
+        <div class="foto nosotros__foto" data-nombre="nosotros.jpg · Muelle">
+          <img src="img/nosotros.jpg" alt="Muelle de madera sobre el arroyo" onerror="this.remove()" loading="lazy">
+          <!-- loading="lazy" = la foto se descarga recién cuando se acerca a la pantalla -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 3) FRASE CON PARALLAX ================= -->
+    <section class="frase">
+      <div class="foto frase__fondo" data-nombre="frase.jpg · Foto de fondo">
+        <img src="img/frase.jpg" alt="" onerror="this.remove()" loading="lazy">
+        <!-- alt vacío = imagen decorativa, los lectores de pantalla la saltean -->
+      </div>
+      <p class="aparecer">Si buscás un espacio tranquilo y libre de contaminación, ¡este es tu lugar!</p>
+    </section>
+
+    <!-- ================= 4) CABAÑAS Y SERVICIOS ================= -->
+    <section class="cabanas" id="cabanas">
+      <header class="titulo-seccion aparecer">
+        <span>Alquiler</span>
+        <h2>Cabañas &amp; Servicios</h2>
+        <!-- &amp; es el símbolo "&" escrito de forma segura en HTML -->
+      </header>
+
+      <div class="tarjetas">
+        <!-- Contenedor en grilla: 3 columnas en escritorio, 1 en celular -->
+        <article class="tarjeta aparecer">
+          <div class="foto tarjeta__foto" data-nombre="cabana1.jpg">
+            <img src="img/cabana1.jpg" alt="Cabaña 1" onerror="this.remove()" loading="lazy">
+          </div>
+          <button class="tarjeta__boton" data-cabana="Cabaña 1">
+            <!-- data-cabana: el JavaScript lo lee para saber qué cabaña abrir en la ventana emergente -->
+            <strong>Cabaña 1</strong>
+            <span>Ver más</span>
+          </button>
+        </article>
+
+        <article class="tarjeta aparecer">
+          <div class="foto tarjeta__foto" data-nombre="cabana2.jpg">
+            <img src="img/cabana2.jpg" alt="Cabaña 2" onerror="this.remove()" loading="lazy">
+          </div>
+          <button class="tarjeta__boton" data-cabana="Cabaña 2">
+            <strong>Cabaña 2</strong>
+            <span>Ver más</span>
+          </button>
+        </article>
+
+        <article class="tarjeta aparecer">
+          <div class="foto tarjeta__foto" data-nombre="cabana3.jpg">
+            <img src="img/cabana3.jpg" alt="Cabaña 3" onerror="this.remove()" loading="lazy">
+          </div>
+          <button class="tarjeta__boton" data-cabana="Cabaña 3">
+            <strong>Cabaña 3</strong>
+            <span>Ver más</span>
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= 5) RESERVAS Y COMODIDADES ================= -->
+    <section class="info">
+      <p class="info__reserva aparecer">
+        Nos manejamos con reserva, es un compromiso de ambas partes y por consiguiente no se devuelve.
+        Para cancelarla o cambiar la fecha debe hacerse con 10 días de anticipación.
+        Cada cabaña tiene espacio para 2 personas.
+      </p>
+
+      <ul class="comodidades">
+        <!-- Lista de comodidades. Cada <li> es una cajita; la clase "no" marca lo que NO se permite -->
+        <li class="aparecer"><svg class="icono" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Termotanque eléctrico 100 L</li>
+        <li class="aparecer"><svg class="icono" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Cocina con horno, heladera con freezer</li>
+        <li class="aparecer"><svg class="icono" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>WiFi</li>
+        <li class="aparecer"><svg class="icono" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Aire acondicionado y ventilador de techo</li>
+        <li class="aparecer"><svg class="icono" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>TV HD (canales de aire, no Smart)</li>
+        <li class="aparecer"><svg class="icono" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Parrilla y mesa de campo</li>
+        <li class="aparecer"><svg class="icono" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Vajilla completa</li>
+        <li class="aparecer"><svg class="icono" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Somier con ropa de cama y toallas blancas</li>
+        <li class="aparecer"><svg class="icono" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Canal privado para amarrar embarcaciones propias</li>
+        <li class="no aparecer"><svg class="icono" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>No se aceptan mascotas, no se permiten visitas</li>
+        <li class="no aparecer"><svg class="icono" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>No se permite el uso de equipos de música</li>
+      </ul>
+    </section>
+
+    <!-- ================= 6) CONTACTO ================= -->
+    <section class="contacto" id="contacto">
+      <form class="formulario aparecer" id="formulario" novalidate>
+        <!-- novalidate: validamos nosotros con JavaScript para mostrar mensajes en español -->
+        <h2>Escribinos</h2>
+        <label class="oculto-visual" for="nombre">Tu nombre</label>
+        <!-- Etiquetas invisibles pero leídas por lectores de pantalla (accesibilidad) -->
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" autocomplete="given-name" required>
+        <label class="oculto-visual" for="apellido">Tu apellido</label>
+        <input type="text" id="apellido" name="apellido" placeholder="Tu apellido" autocomplete="family-name" required>
+        <label class="oculto-visual" for="mensaje">Tu mensaje</label>
+        <textarea id="mensaje" name="mensaje" rows="5" placeholder="Enviános tu mensaje y lo recibimos en nuestro WhatsApp" required></textarea>
+        <button type="submit" class="boton boton--oscuro">
+          Enviar
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.8-.2 1.5z"/></svg>
+          <!-- Ícono de WhatsApp -->
+        </button>
+        <p class="formulario__estado" id="estado" role="status" aria-live="polite"></p>
+        <!-- Acá JavaScript escribe avisos ("Completá todos los campos", etc.) -->
+      </form>
+
+      <nav class="pie-menu" aria-label="Menú del pie">
+        <a href="#inicio">Inicio</a>
+        <a href="#cabanas">Servicios</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>© 2026 Cabañas Los Caquis · Delta de Tigre</p>
+  </footer>
+
+  <!-- ================= VENTANA EMERGENTE DE CABAÑA ================= -->
+  <dialog class="modal" id="modal">
+    <!-- <dialog> es una ventana emergente nativa del navegador: se abre/cierra con JavaScript y el navegador maneja el foco y la tecla Esc -->
+    <button class="modal__cerrar" id="cerrarModal" aria-label="Cerrar">&times;</button>
+    <h3 id="modalTitulo">Cabaña</h3>
+    <p>Acá vamos a poner la descripción, las fotos y el precio de cada cabaña. Por ahora es texto de ejemplo.</p>
+    <a href="#contacto" class="boton" id="modalReservar">Consultar disponibilidad</a>
+  </dialog>
+
+</body>
+
+</html>

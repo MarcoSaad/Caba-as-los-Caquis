@@ -1,0 +1,7 @@
+# Archivos de variables secretas
+.env
+# Basura de Windows
+Thumbs.db
+Desktop.ini
+# Configuración personal de VS Code
+.vscode/

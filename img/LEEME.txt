@@ -1,0 +1,11 @@
+Poné acá las fotos con ESTOS nombres exactos (jpg):
+
+hero.jpg      -> foto grande de la portada (cabaña entre los árboles)
+nosotros.jpg  -> el muelle (sección "Quiénes somos")
+frase.jpg     -> foto de fondo de la frase (la de las reposeras)
+cabana1.jpg   -> Cabaña 1
+cabana2.jpg   -> Cabaña 2
+cabana3.jpg   -> Cabaña 3
+
+Consejo: achicalas antes de subirlas (ancho máx. 1600 px, menos de 300 KB cada una),
+así la página carga rápido. Si una foto no está, se ve un recuadro verde con su nombre.

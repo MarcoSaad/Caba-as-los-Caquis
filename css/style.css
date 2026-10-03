@@ -1,0 +1,323 @@
+/* =====================================================
+   CABAÑAS LOS CAQUIS - ESTILOS
+   Orden: variables > base > cabecera > hero > nosotros >
+          frase > cabañas > info > contacto > pie > modal >
+          animaciones > celular
+   ===================================================== */
+
+/* ---------- VARIABLES: colores y medidas en un solo lugar ---------- */
+:root {
+  --verde: #5ab31b;          /* verde principal (el de tu página actual) */
+  --verde-oscuro: #3d7a12;   /* verde para detalles y hover */
+  --negro: #15170f;          /* negro algo verdoso, más suave que #000 */
+  --gris-claro: #f5f5f3;     /* fondo de secciones claras */
+  --gris: #e6e6e3;           /* fondo del contacto */
+  --blanco: #fff;
+  --titulos: "Cormorant Garamond", Georgia, serif;   /* tipografía de títulos; si no carga, usa Georgia */
+  --texto: system-ui, -apple-system, "Segoe UI", Arial, sans-serif; /* tipografía del texto */
+  --ancho-max: 1200px;       /* ancho máximo del contenido */
+  --alto-menu: 72px;         /* alto de la barra superior */
+}
+
+/* ---------- BASE ---------- */
+* { box-sizing: border-box; }      /* el padding no agranda las cajas */
+html { scroll-behavior: smooth; }  /* al hacer clic en el menú, baja deslizándose en vez de saltar */
+section[id] { scroll-margin-top: var(--alto-menu); } /* al saltar a una sección, deja lugar para la barra fija */
+
+body {
+  margin: 0;
+  font-family: var(--texto);
+  color: var(--negro);
+  background: var(--gris-claro);
+  line-height: 1.6;
+}
+
+h1, h2, h3 { font-family: var(--titulos); line-height: 1.15; margin: 0; } /* títulos con la tipografía elegante */
+img { max-width: 100%; display: block; }  /* las imágenes nunca se pasan del ancho de su caja */
+a { color: inherit; }                     /* los enlaces heredan el color del texto */
+
+/* Texto solo para lectores de pantalla (oculto a la vista) */
+.oculto-visual {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---------- FOTOS: recuadro verde con cartel mientras no hay imagen ---------- */
+.foto {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #7ccf3a, #3d7a12);   /* degradé verde de relleno */
+}
+.foto::after {                         /* el cartel con el nombre del archivo */
+  content: attr(data-nombre);          /* toma el texto del atributo data-nombre del HTML */
+  position: absolute; inset: 0;        /* ocupa toda la caja */
+  display: grid; place-items: center;  /* centrado */
+  color: rgba(255, 255, 255, .85);
+  font-size: .9rem; text-align: center; padding: 1rem;
+}
+.foto img {                            /* cuando existe la imagen, se pone encima del cartel */
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;                   /* recorta la imagen para llenar la caja sin deformarla */
+  z-index: 1;
+}
+
+/* ---------- BOTONES ---------- */
+.boton {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .7rem 1.4rem;
+  border: 2px solid var(--verde);
+  color: var(--blanco);
+  background: transparent;
+  text-decoration: none;
+  text-transform: uppercase; letter-spacing: .05em;
+  font: inherit; font-size: 1rem; cursor: pointer;
+  transition: background .25s, color .25s, transform .25s; /* cambios suaves al pasar el mouse */
+}
+.boton:hover { background: var(--verde); transform: translateY(-2px); } /* se rellena y sube un poquito */
+.boton--oscuro { color: var(--negro); border-color: var(--negro); }
+.boton--oscuro:hover { background: var(--negro); color: var(--blanco); }
+
+/* ---------- CABECERA ---------- */
+.cabecera {
+  position: fixed; top: 0; left: 0; right: 0;   /* fija arriba y a lo ancho */
+  z-index: 100;                                 /* por encima de todo */
+  height: var(--alto-menu);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(1rem, 5vw, 4rem);            /* margen lateral que se adapta al ancho de pantalla */
+  transition: background .3s, box-shadow .3s;
+}
+.cabecera.con-fondo {                           /* clase que agrega JavaScript al bajar */
+  background: rgba(21, 23, 15, .92);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .25);
+}
+.logo {
+  font-family: var(--titulos); font-size: 1.7rem; font-weight: 600;
+  color: var(--blanco); text-decoration: none; letter-spacing: .04em;
+}
+.menu { display: flex; background: var(--blanco); }       /* barra blanca como en tu diseño */
+.menu a {
+  padding: 1rem 2.2rem;
+  text-decoration: none; text-transform: uppercase; font-size: .95rem;
+  color: var(--negro);
+  transition: color .2s, background .2s;
+}
+.menu a:hover { background: var(--verde); color: var(--blanco); }
+.hamburguesa { display: none; }   /* oculto en escritorio; aparece en celular (ver al final) */
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh; min-height: 100svh;     /* alto de la pantalla (svh = no cuenta la barra del navegador en celu) */
+  display: flex; align-items: center;
+  color: var(--blanco);
+  overflow: hidden;
+}
+.hero__fondo { position: absolute; inset: 0; }   /* la foto ocupa todo el hero */
+.hero__fondo img { animation: zoom-lento 18s ease-out both; }  /* acercamiento muy lento al cargar */
+.hero__velo {
+  position: absolute; inset: 0 50% 0 0;          /* cubre solo la mitad izquierda */
+  z-index: 2;
+  background: rgba(0, 0, 0, .72);
+}
+.hero__contenido {
+  position: relative; z-index: 3;                /* encima del velo */
+  padding: 0 clamp(1rem, 5vw, 4rem);
+  max-width: 560px;
+  animation: subir 1s .2s ease-out both;         /* entra deslizándose hacia arriba */
+}
+.hero__lugar { display: flex; align-items: center; gap: .5rem; margin: 0 0 .5rem; font-size: .95rem; }
+.hero h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); margin-bottom: 1.5rem; } /* clamp = mínimo, ideal, máximo */
+
+/* ---------- NOSOTROS ---------- */
+.nosotros {
+  display: grid; grid-template-columns: 1fr 1fr;   /* dos columnas iguales */
+  align-items: center; gap: 3rem;
+  max-width: var(--ancho-max); margin: 0 auto;
+  padding: 6rem clamp(1rem, 5vw, 4rem);
+  overflow: hidden;                                /* el bloque verde decorativo no puede generar scroll horizontal en celular */
+}
+.nosotros__texto h2 {
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  display: flex; align-items: center; gap: 1.2rem;
+}
+.nosotros__texto h2::before {                      /* la rayita verde antes del título */
+  content: ""; width: 70px; height: 2px; background: var(--verde); flex-shrink: 0;
+}
+.nosotros__texto p { max-width: 34ch; margin-left: 0; font-size: 1.1rem; }
+.nosotros__imagen { position: relative; aspect-ratio: 1 / 1; max-width: 480px; justify-self: end; width: 100%; }
+.nosotros__bloque {                                /* bloque verde desfasado hacia arriba a la derecha */
+  position: absolute; top: -8%; right: -10%; width: 80%; height: 80%;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.18), transparent 45%),
+    linear-gradient(160deg, #6fd02a, var(--verde));
+}
+.nosotros__foto { position: absolute; left: 0; bottom: 0; width: 82%; height: 82%; } /* foto abajo a la izquierda, tapa parte del bloque */
+
+/* ---------- FRASE CON PARALLAX ---------- */
+.frase {
+  position: relative; display: grid; place-items: center;
+  min-height: 320px; padding: 4rem 1.5rem; text-align: center; color: var(--blanco);
+}
+.frase__fondo { position: absolute; inset: 0; }
+.frase__fondo::before {                    /* velo oscuro sobre la foto */
+  content: ""; position: absolute; inset: 0; z-index: 2; background: rgba(0, 0, 0, .55);
+}
+.frase p {
+  position: relative; z-index: 3; margin: 0; max-width: 28ch;
+  font-family: var(--titulos); font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 600;
+  line-height: 1.25;                      /* interlineado más cerrado para frases grandes */
+}
+/* Parallax simple: la foto queda quieta mientras el contenido pasa por encima (solo escritorio) */
+@media (min-width: 901px) {
+  .frase__fondo img { position: fixed; z-index: 0; clip-path: none; }
+  .frase__fondo { clip-path: inset(0); }  /* recorta la foto fija a la caja de la sección */
+}
+
+/* ---------- CABAÑAS ---------- */
+.cabanas {
+  background: linear-gradient(180deg, #6fcb2c, var(--verde) 60%, #4c9a14);
+  padding: 5rem clamp(1rem, 5vw, 4rem);
+  color: var(--blanco);
+}
+.titulo-seccion { text-align: center; margin-bottom: 3rem; }
+.titulo-seccion span { display: block; font-size: 1.05rem; }
+.titulo-seccion h2 { font-size: clamp(2rem, 4vw, 2.8rem); }
+.tarjetas {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;   /* 3 columnas iguales */
+  max-width: var(--ancho-max); margin: 0 auto;
+}
+.tarjeta { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.tarjeta__foto {
+  width: 100%; aspect-ratio: 4 / 3;               /* proporción fija: todas las fotos iguales */
+  border: 5px solid #000;                         /* marco negro como en tu diseño */
+  transition: transform .35s;
+}
+.tarjeta:hover .tarjeta__foto { transform: scale(1.02); }   /* leve zoom al pasar el mouse */
+.tarjeta__boton {
+  display: grid; gap: .4rem; min-width: 60%;
+  padding: .9rem 1.5rem;
+  background: rgba(21, 23, 15, .88); color: var(--blanco);
+  border: 0; border-radius: 6px; font: inherit; cursor: pointer;
+  transition: background .25s, transform .25s;
+}
+.tarjeta__boton strong { font-weight: 500; font-size: 1.1rem; }
+.tarjeta__boton span { font-size: .9rem; opacity: .85; }
+.tarjeta__boton:hover { background: var(--negro); transform: translateY(-3px); }
+
+/* ---------- INFO: reservas y comodidades ---------- */
+.info { background: var(--blanco); padding: 5rem clamp(1rem, 5vw, 4rem); }
+.info__reserva {
+  max-width: 58ch; margin: 0 auto 4rem; text-align: center; font-weight: 700;
+}
+.comodidades {
+  list-style: none; margin: 0 auto; padding: 0;     /* saca los puntitos de la lista */
+  max-width: var(--ancho-max);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+}
+.comodidades li {
+  display: flex; align-items: center; gap: .8rem;
+  min-height: 70px; padding: .8rem 1.1rem;
+  background: var(--negro); color: var(--blanco); border-radius: 10px;
+  transition: transform .25s, background .25s;
+}
+.comodidades li:hover { transform: translateY(-3px); background: #232717; }
+.icono {                                            /* tilde o cruz */
+  width: 22px; height: 22px; flex-shrink: 0;
+  fill: none; stroke: #2fb52f; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
+}
+.comodidades .no .icono { stroke: #e03131; }        /* la cruz va en rojo */
+
+/* ---------- CONTACTO ---------- */
+.contacto {
+  background: var(--gris);
+  display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem;
+  padding: 4rem clamp(1rem, 5vw, 4rem);
+}
+.formulario { display: grid; gap: .8rem; max-width: 560px; width: 100%; justify-self: center; }
+.formulario h2 { font-size: 2rem; }
+.formulario input, .formulario textarea {
+  width: 100%; padding: .8rem; border: 2px solid transparent;
+  background: var(--gris-claro); font: inherit; resize: vertical;
+  transition: border-color .2s;
+}
+.formulario input:focus, .formulario textarea:focus { outline: none; border-color: var(--verde); } /* borde verde al escribir */
+.formulario .boton { justify-self: start; }
+.formulario__estado { margin: 0; min-height: 1.5em; font-size: .95rem; }
+.formulario__estado.error { color: #c92a2a; }
+.pie-menu { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid #aaa; padding-bottom: 1rem; }
+.pie-menu a { text-decoration: none; }
+.pie-menu a:hover { color: var(--verde-oscuro); text-decoration: underline; }
+
+/* ---------- PIE ---------- */
+.pie { background: var(--negro); color: #cfd2c6; text-align: center; padding: 1.2rem; font-size: .9rem; }
+.pie p { margin: 0; }
+
+/* ---------- VENTANA EMERGENTE ---------- */
+.modal {
+  border: 0; border-radius: 12px; padding: 2rem; max-width: min(90vw, 460px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+}
+.modal::backdrop { background: rgba(0, 0, 0, .6); }   /* fondo oscurecido detrás de la ventana */
+.modal h3 { font-size: 2rem; margin-bottom: .8rem; }
+.modal .boton { color: var(--negro); border-color: var(--negro); margin-top: 1rem; }
+.modal .boton:hover { background: var(--negro); color: var(--blanco); }
+.modal__cerrar {
+  position: absolute; top: .6rem; right: .9rem;
+  background: none; border: 0; font-size: 2rem; line-height: 1; cursor: pointer;
+}
+
+/* ---------- ANIMACIONES ---------- */
+.aparecer {                      /* estado inicial: invisible y un poco más abajo */
+  opacity: 0; transform: translateY(32px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.aparecer.visible { opacity: 1; transform: none; }   /* JavaScript agrega "visible" cuando entra en pantalla */
+.comodidades li.aparecer.visible { transition-delay: calc(var(--n, 0) * 60ms); } /* aparecen escalonadas */
+
+@keyframes subir { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+@keyframes zoom-lento { from { transform: scale(1.08); } to { transform: scale(1); } }
+
+/* Si el usuario pidió "reducir movimiento" en su sistema, apagamos las animaciones (accesibilidad) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .aparecer { opacity: 1; transform: none; }
+}
+
+/* ---------- TABLET ---------- */
+@media (max-width: 1000px) {
+  .comodidades { grid-template-columns: repeat(2, 1fr); }  /* 2 columnas */
+  .menu a { padding: 1rem 1.2rem; }
+}
+
+/* ---------- CELULAR ---------- */
+@media (max-width: 900px) {
+  .hamburguesa {                         /* ahora sí se ve el botón de 3 rayitas */
+    display: grid; gap: 5px; width: 44px; height: 44px; place-content: center;
+    background: var(--blanco); border: 0; cursor: pointer;
+  }
+  .hamburguesa span { width: 22px; height: 2px; background: var(--negro); transition: transform .3s, opacity .3s; }
+  .hamburguesa[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }  /* rayitas → X */
+  .hamburguesa[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .hamburguesa[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .menu {                                /* el menú pasa a ser un panel desplegable */
+    position: absolute; top: var(--alto-menu); left: 0; right: 0;
+    flex-direction: column;
+    max-height: 0; overflow: hidden;     /* cerrado: altura 0 */
+    transition: max-height .35s ease;
+  }
+  .menu.abierto { max-height: 320px; }   /* abierto: se despliega */
+  .menu a { padding: 1rem 1.5rem; border-top: 1px solid #eee; }
+
+  .hero__velo { inset: 0; background: rgba(0, 0, 0, .55); }  /* en celular el velo cubre todo */
+  .nosotros, .contacto { grid-template-columns: 1fr; }        /* una sola columna */
+  .nosotros__imagen { justify-self: center; margin-top: 2rem; max-width: 420px; }
+  .tarjetas { grid-template-columns: 1fr; max-width: 520px; }
+}
+
+@media (max-width: 520px) {
+  .comodidades { grid-template-columns: 1fr; }   /* 1 columna en celulares chicos */
+  .nosotros { padding: 4rem 1rem; }
+  .nosotros__texto h2::before { width: 40px; }
+}

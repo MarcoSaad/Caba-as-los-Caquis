@@ -62,11 +62,12 @@
       <div class="hero__velo"></div>
       <!-- Capa oscura sobre la mitad izquierda para que el texto se lea -->
       <div class="hero__contenido">
-        <p class="hero__lugar">
+        <a class="hero__lugar" data-maps target="_blank" rel="noopener">
+          <!-- <a data-maps>: el JavaScript le pone el link de Google Maps (ver URL_MAPS en main.js). target="_blank" lo abre en pestaña nueva -->
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
-          <!-- Ícono de ubicación dibujado con SVG (no pesa nada y se escala sin perder calidad) -->
+          <!-- Ícono de ubicación dibujado con SVG -->
           Acá estamos
-        </p>
+        </a>
         <h1>Una Experiencia Única</h1>
         <!-- Único <h1> de la página (importa para Google) -->
         <a href="#contacto" class="boton">Contactanos</a>
@@ -75,29 +76,37 @@
 
     <!-- ================= 2) NOSOTROS ================= -->
     <section class="nosotros" id="nosotros">
-      <div class="nosotros__texto aparecer">
-        <!-- Clase "aparecer" = JavaScript la anima cuando entra en pantalla -->
-        <h2>¿Quiénes somos?</h2>
-        <p>
-          Cabañas Los Caquis es un predio atendido por su dueño las 24 hs.
-          Estamos ubicados en Arroyo Espera 815, a 70 minutos en lancha colectivo
-          o 20 minutos en lancha taxi.
-        </p>
-      </div>
-      <div class="nosotros__imagen aparecer">
-        <div class="nosotros__bloque"></div>
-        <!-- Bloque verde decorativo que queda detrás de la foto -->
-        <div class="foto nosotros__foto" data-nombre="nosotros.jpg · Muelle">
-          <img src="img/nosotros.jpg" alt="Muelle de madera sobre el arroyo" onerror="this.remove()" loading="lazy">
-          <!-- loading="lazy" = la foto se descarga recién cuando se acerca a la pantalla -->
+      <!-- La sección ocupa todo el ancho (para que el fondo de textura llegue a los bordes); el contenido va en un contenedor interior más angosto -->
+      <div class="nosotros__interior">
+        <div class="nosotros__texto aparecer">
+          <!-- Clase "aparecer" = JavaScript la anima cuando entra en pantalla -->
+          <h2>¿Quiénes somos?</h2>
+          <p>
+            Cabañas Los Caquis es un predio atendido por su dueño las 24 hs.
+            Estamos ubicados en Arroyo Espera 815, a 70 minutos en lancha colectivo
+            o 20 minutos en lancha taxi.
+          </p>
+          <a class="enlace-mapa" data-maps target="_blank" rel="noopener">Cómo llegar en Google Maps →</a>
+          <!-- Enlace con flechita; también recibe el link desde main.js -->
+        </div>
+        <div class="nosotros__imagen aparecer">
+          <div class="foto nosotros__bloque" data-nombre="lancha.jpg · Lancha">
+            <!-- Cuadrado de atrás: ahora lleva la foto de la lancha navegando -->
+            <img src="img/lancha.jpg" alt="Lancha colectivo navegando por el río" onerror="this.remove()" loading="lazy">
+          </div>
+          <div class="foto nosotros__foto" data-nombre="nosotros.jpg · El dueño">
+            <!-- Cuadrado de adelante: el dueño del predio -->
+            <img src="img/nosotros.jpg" alt="El dueño de Cabañas Los Caquis en el predio" onerror="this.remove()" loading="lazy">
+            <!-- loading="lazy" = la foto se descarga recién cuando se acerca a la pantalla -->
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ================= 3) FRASE CON PARALLAX ================= -->
     <section class="frase">
-      <div class="foto frase__fondo" data-nombre="frase.jpg · Foto de fondo">
-        <img src="img/frase.jpg" alt="" onerror="this.remove()" loading="lazy">
+      <div class="foto frase__fondo" data-nombre="fondo2.jpg · Fondo de la frase">
+        <img src="img/fondo2.jpg" alt="" onerror="this.remove()" loading="lazy">
         <!-- alt vacío = imagen decorativa, los lectores de pantalla la saltean -->
       </div>
       <p class="aparecer">Si buscás un espacio tranquilo y libre de contaminación, ¡este es tu lugar!</p>
@@ -111,39 +120,8 @@
         <!-- &amp; es el símbolo "&" escrito de forma segura en HTML -->
       </header>
 
-      <div class="tarjetas">
-        <!-- Contenedor en grilla: 3 columnas en escritorio, 1 en celular -->
-        <article class="tarjeta aparecer">
-          <div class="foto tarjeta__foto" data-nombre="cabana1.jpg">
-            <img src="img/cabana1.jpg" alt="Cabaña 1" onerror="this.remove()" loading="lazy">
-          </div>
-          <button class="tarjeta__boton" data-cabana="Cabaña 1">
-            <!-- data-cabana: el JavaScript lo lee para saber qué cabaña abrir en la ventana emergente -->
-            <strong>Cabaña 1</strong>
-            <span>Ver más</span>
-          </button>
-        </article>
-
-        <article class="tarjeta aparecer">
-          <div class="foto tarjeta__foto" data-nombre="cabana2.jpg">
-            <img src="img/cabana2.jpg" alt="Cabaña 2" onerror="this.remove()" loading="lazy">
-          </div>
-          <button class="tarjeta__boton" data-cabana="Cabaña 2">
-            <strong>Cabaña 2</strong>
-            <span>Ver más</span>
-          </button>
-        </article>
-
-        <article class="tarjeta aparecer">
-          <div class="foto tarjeta__foto" data-nombre="cabana3.jpg">
-            <img src="img/cabana3.jpg" alt="Cabaña 3" onerror="this.remove()" loading="lazy">
-          </div>
-          <button class="tarjeta__boton" data-cabana="Cabaña 3">
-            <strong>Cabaña 3</strong>
-            <span>Ver más</span>
-          </button>
-        </article>
-      </div>
+      <div class="tarjetas" id="tarjetas"></div>
+      <!-- Vacío a propósito: main.js crea las 4 tarjetas a partir de la lista CABANAS -->
     </section>
 
     <!-- ================= 5) RESERVAS Y COMODIDADES ================= -->
@@ -170,7 +148,7 @@
       </ul>
     </section>
 
-    <!-- ================= 6) CONTACTO ================= -->
+    <!-- ================= 6) CONTACTO Y RESEÑAS ================= -->
     <section class="contacto" id="contacto">
       <form class="formulario aparecer" id="formulario" novalidate>
         <!-- novalidate: validamos nosotros con JavaScript para mostrar mensajes en español -->
@@ -191,25 +169,49 @@
         <!-- Acá JavaScript escribe avisos ("Completá todos los campos", etc.) -->
       </form>
 
-      <nav class="pie-menu" aria-label="Menú del pie">
-        <a href="#inicio">Inicio</a>
-        <a href="#cabanas">Servicios</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
+      <aside class="resenas aparecer" aria-labelledby="resenasTitulo">
+        <!-- <aside> = contenido complementario: las reseñas al lado del formulario -->
+        <h2 id="resenasTitulo">Lo que dicen nuestros huéspedes</h2>
+        <div class="resenas__resumen" id="resenasResumen" hidden>
+          <!-- "hidden" lo oculta hasta que main.js tenga el puntaje real (RESUMEN_RESENAS) -->
+          <strong id="resenasPuntaje"></strong>
+          <span class="resenas__estrellas-grandes" id="resenasEstrellas" aria-hidden="true"></span>
+          <span id="resenasCantidad"></span>
+        </div>
+        <ul class="resenas__lista" id="resenasLista"></ul>
+        <!-- Las tarjetas de reseñas las crea main.js desde la lista RESENAS -->
+        <p class="resenas__vacio" id="resenasVacio">Pronto vas a ver acá las opiniones de quienes ya nos visitaron.</p>
+        <a class="boton boton--oscuro" data-maps target="_blank" rel="noopener">Ver reseñas en Google Maps</a>
+      </aside>
     </section>
   </main>
 
   <footer class="pie">
+    <nav class="pie__menu" aria-label="Menú del pie">
+      <a href="#inicio">Inicio</a>
+      <a href="#cabanas">Cabañas</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
     <p>© 2026 Cabañas Los Caquis · Delta de Tigre</p>
   </footer>
 
-  <!-- ================= VENTANA EMERGENTE DE CABAÑA ================= -->
-  <dialog class="modal" id="modal">
-    <!-- <dialog> es una ventana emergente nativa del navegador: se abre/cierra con JavaScript y el navegador maneja el foco y la tecla Esc -->
+  <!-- ================= VENTANA DE CABAÑA (GALERÍA) ================= -->
+  <dialog class="modal" id="modal" aria-labelledby="modalTitulo">
+    <!-- <dialog> es una ventana emergente nativa: el navegador maneja el foco y la tecla Esc. El contenido lo completa main.js -->
     <button class="modal__cerrar" id="cerrarModal" aria-label="Cerrar">&times;</button>
-    <h3 id="modalTitulo">Cabaña</h3>
-    <p>Acá vamos a poner la descripción, las fotos y el precio de cada cabaña. Por ahora es texto de ejemplo.</p>
+    <h3 id="modalTitulo"></h3>
+
+    <div class="galeria">
+      <div class="galeria__pista" id="galeriaPista" tabindex="0" aria-label="Fotos de la cabaña"></div>
+      <!-- La pista es una fila horizontal de fotos que se desliza (con el dedo, flechas o teclado) -->
+      <button class="galeria__flecha galeria__flecha--prev" id="galeriaPrev" aria-label="Foto anterior">&#8249;</button>
+      <button class="galeria__flecha galeria__flecha--next" id="galeriaNext" aria-label="Foto siguiente">&#8250;</button>
+      <p class="galeria__contador" id="galeriaContador" aria-live="polite"></p>
+    </div>
+
+    <p class="modal__texto" id="modalTexto"></p>
+    <!-- Texto sutil debajo de las fotos. Se completa en CABANAS (main.js); si está vacío no se ve -->
     <a href="#contacto" class="boton" id="modalReservar">Consultar disponibilidad</a>
   </dialog>
 

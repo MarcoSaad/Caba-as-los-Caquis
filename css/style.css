@@ -114,7 +114,7 @@ a { color: inherit; }                     /* los enlaces heredan el color del te
   overflow: hidden;
 }
 .hero__fondo { position: absolute; inset: 0; }   /* la foto ocupa todo el hero */
-.hero__fondo img { animation: zoom-lento 18s ease-out both; }  /* acercamiento muy lento al cargar */
+.hero__fondo img { animation: zoom-lento 18s ease-out both; object-position: 50% 30%; }  /* zoom lento + encuadre: la foto es vertical, mostramos la zona de las cabañas */
 .hero__velo {
   position: absolute; inset: 0 50% 0 0;          /* cubre solo la mitad izquierda */
   z-index: 2;
@@ -126,33 +126,52 @@ a { color: inherit; }                     /* los enlaces heredan el color del te
   max-width: 560px;
   animation: subir 1s .2s ease-out both;         /* entra deslizándose hacia arriba */
 }
-.hero__lugar { display: flex; align-items: center; gap: .5rem; margin: 0 0 .5rem; font-size: .95rem; }
+.hero__lugar {
+  display: inline-flex; align-items: center; gap: .5rem; margin: 0 0 .5rem; font-size: .95rem;
+  color: inherit; text-decoration: none;        /* es un enlace, pero se ve como texto */
+}
+.hero__lugar:hover { text-decoration: underline; }
 .hero h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); margin-bottom: 1.5rem; } /* clamp = mínimo, ideal, máximo */
 
 /* ---------- NOSOTROS ---------- */
 .nosotros {
+  position: relative;
+  /* Fondo: textura de hojas + velo verde oscuro encima (así el texto blanco se lee bien).
+     Si la imagen no existe, queda el verde oscuro de abajo. */
+  background:
+    linear-gradient(rgba(10, 40, 12, .55), rgba(10, 40, 12, .55)),
+    url("../img/textura.jpg") center / cover,
+    var(--verde-oscuro);
+  color: var(--blanco);
+  overflow: hidden;                                /* el cuadrado decorativo no puede generar scroll horizontal en celular */
+}
+.nosotros__interior {                              /* contenedor angosto y centrado */
   display: grid; grid-template-columns: 1fr 1fr;   /* dos columnas iguales */
   align-items: center; gap: 3rem;
   max-width: var(--ancho-max); margin: 0 auto;
   padding: 6rem clamp(1rem, 5vw, 4rem);
-  overflow: hidden;                                /* el bloque verde decorativo no puede generar scroll horizontal en celular */
 }
 .nosotros__texto h2 {
   font-size: clamp(2rem, 4vw, 2.6rem);
   display: flex; align-items: center; gap: 1.2rem;
 }
-.nosotros__texto h2::before {                      /* la rayita verde antes del título */
-  content: ""; width: 70px; height: 2px; background: var(--verde); flex-shrink: 0;
+.nosotros__texto h2::before {                      /* la rayita antes del título (verde claro para que se vea sobre el fondo oscuro) */
+  content: ""; width: 70px; height: 2px; background: #9be05a; flex-shrink: 0;
 }
 .nosotros__texto p { max-width: 34ch; margin-left: 0; font-size: 1.1rem; }
+.nosotros .enlace-mapa { color: #bff08d; }
+.nosotros .enlace-mapa:hover { border-color: #bff08d; }
 .nosotros__imagen { position: relative; aspect-ratio: 1 / 1; max-width: 480px; justify-self: end; width: 100%; }
-.nosotros__bloque {                                /* bloque verde desfasado hacia arriba a la derecha */
-  position: absolute; top: -8%; right: -10%; width: 80%; height: 80%;
-  background:
-    radial-gradient(circle at 30% 20%, rgba(255,255,255,.18), transparent 45%),
-    linear-gradient(160deg, #6fd02a, var(--verde));
+.nosotros__bloque {                                /* cuadrado de atrás (foto de la lancha), desfasado arriba a la derecha */
+  position: absolute; top: -4%; right: -4%; width: 72%; height: 72%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
 }
-.nosotros__foto { position: absolute; left: 0; bottom: 0; width: 82%; height: 82%; } /* foto abajo a la izquierda, tapa parte del bloque */
+.nosotros__bloque img { object-position: 50% 85%; }   /* encuadre vertical: deja a la lancha en la parte visible */
+.nosotros__foto {                                 /* cuadrado de adelante (el dueño): abajo a la izquierda, tapa parte del de atrás */
+  position: absolute; left: 0; bottom: 0; width: 68%; height: 68%;
+  border: 6px solid rgba(255, 255, 255, .92);      /* marco blanco para separar las dos fotos */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+}
 
 /* ---------- FRASE CON PARALLAX ---------- */
 .frase {
@@ -170,13 +189,18 @@ a { color: inherit; }                     /* los enlaces heredan el color del te
 }
 /* Parallax simple: la foto queda quieta mientras el contenido pasa por encima (solo escritorio) */
 @media (min-width: 901px) {
-  .frase__fondo img { position: fixed; z-index: 0; clip-path: none; }
+  .frase__fondo img { position: fixed; z-index: 1; }  /* z-index 1 = la foto queda por encima del cartel de relleno */
   .frase__fondo { clip-path: inset(0); }  /* recorta la foto fija a la caja de la sección */
 }
 
 /* ---------- CABAÑAS ---------- */
 .cabanas {
-  background: linear-gradient(180deg, #6fcb2c, var(--verde) 60%, #4c9a14);
+  /* Fondo: vista aérea del delta + velo oscuro verdoso para que se lea el texto blanco.
+     Si la imagen no existe, queda el degradé verde de abajo. */
+  background:
+    linear-gradient(rgba(8, 35, 10, .58), rgba(8, 35, 10, .65)),
+    url("../img/delta.jpg") center / cover,
+    linear-gradient(180deg, #6fcb2c, var(--verde) 60%, #4c9a14);
   padding: 5rem clamp(1rem, 5vw, 4rem);
   color: var(--blanco);
 }
@@ -184,12 +208,12 @@ a { color: inherit; }                     /* los enlaces heredan el color del te
 .titulo-seccion span { display: block; font-size: 1.05rem; }
 .titulo-seccion h2 { font-size: clamp(2rem, 4vw, 2.8rem); }
 .tarjetas {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;   /* 3 columnas iguales */
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;   /* 4 columnas iguales (una por cabaña) */
   max-width: var(--ancho-max); margin: 0 auto;
 }
 .tarjeta { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 .tarjeta__foto {
-  width: 100%; aspect-ratio: 4 / 3;               /* proporción fija: todas las fotos iguales */
+  width: 100%; aspect-ratio: 4 / 5;               /* proporción casi vertical: nuestras fotos son verticales */
   border: 5px solid #000;                         /* marco negro como en tu diseño */
   transition: transform .35s;
 }
@@ -245,26 +269,79 @@ a { color: inherit; }                     /* los enlaces heredan el color del te
 .formulario .boton { justify-self: start; }
 .formulario__estado { margin: 0; min-height: 1.5em; font-size: .95rem; }
 .formulario__estado.error { color: #c92a2a; }
-.pie-menu { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid #aaa; padding-bottom: 1rem; }
-.pie-menu a { text-decoration: none; }
-.pie-menu a:hover { color: var(--verde-oscuro); text-decoration: underline; }
+
+/* Reseñas de Google Maps al lado del formulario */
+.resenas { display: grid; gap: 1rem; align-content: start; max-width: 560px; width: 100%; justify-self: center; }
+.resenas h2 { font-size: 2rem; }
+.resenas__resumen { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem; }
+.resenas__resumen strong { font-family: var(--titulos); font-size: 2.4rem; line-height: 1; }
+.resenas__estrellas-grandes { color: #f5a623; font-size: 1.3rem; letter-spacing: .1em; } /* estrellas doradas */
+.resenas__lista { list-style: none; margin: 0; padding: 0; display: grid; gap: .8rem; }
+.resena { background: var(--blanco); border-radius: 10px; padding: 1rem 1.2rem; box-shadow: 0 1px 4px rgba(0, 0, 0, .08); }
+.resena p { margin: 0; }
+.resena__estrellas { color: #f5a623; letter-spacing: .1em; }
+.resena__texto { margin: .3rem 0 !important; }
+.resena__autor { font-size: .9rem; color: #5b6055; font-weight: 600; }
+.resenas__vacio { margin: 0; color: #5b6055; font-style: italic; }
+.resenas .boton { justify-self: start; }
 
 /* ---------- PIE ---------- */
 .pie { background: var(--negro); color: #cfd2c6; text-align: center; padding: 1.2rem; font-size: .9rem; }
 .pie p { margin: 0; }
+.pie__menu { display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem 2rem; margin-bottom: .8rem; }
+.pie__menu a { text-decoration: none; }
+.pie__menu a:hover { color: var(--verde); text-decoration: underline; }
 
-/* ---------- VENTANA EMERGENTE ---------- */
+/* ---------- VENTANA DE CABAÑA + GALERÍA ---------- */
 .modal {
-  border: 0; border-radius: 12px; padding: 2rem; max-width: min(90vw, 460px);
+  border: 0; border-radius: 12px; padding: 1.5rem;
+  width: min(94vw, 880px); max-width: none; max-height: 92vh;   /* ancha, pero nunca más alta que la pantalla */
+  overflow: auto;
   box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
 }
-.modal::backdrop { background: rgba(0, 0, 0, .6); }   /* fondo oscurecido detrás de la ventana */
-.modal h3 { font-size: 2rem; margin-bottom: .8rem; }
-.modal .boton { color: var(--negro); border-color: var(--negro); margin-top: 1rem; }
+.modal::backdrop { background: rgba(0, 0, 0, .65); }   /* fondo oscurecido detrás de la ventana */
+.modal h3 { font-size: 2rem; margin: 0 2rem .8rem 0; }
+.modal__texto { margin: 1rem 0 0; color: #5b6055; font-size: .98rem; max-width: 62ch; }
+.modal__texto:empty { display: none; }                  /* sin texto = no ocupa lugar */
+.modal .boton { color: var(--negro); border-color: var(--negro); margin-top: 1.2rem; }
 .modal .boton:hover { background: var(--negro); color: var(--blanco); }
 .modal__cerrar {
   position: absolute; top: .6rem; right: .9rem;
   background: none; border: 0; font-size: 2rem; line-height: 1; cursor: pointer;
+}
+
+.galeria { position: relative; }
+.galeria__pista {
+  height: min(62vh, 560px);                       /* alto limitado para que entre en pantalla */
+  display: flex;                                  /* fotos una al lado de la otra */
+  overflow-x: auto;                               /* se desliza horizontalmente */
+  scroll-snap-type: x mandatory;                  /* cada foto "se engancha" al centro */
+  scrollbar-width: none;                          /* sin barra de scroll (Firefox) */
+  border-radius: 8px;
+  outline-offset: 3px;
+}
+.galeria__pista::-webkit-scrollbar { display: none; }   /* sin barra de scroll (Chrome/Safari) */
+.galeria__foto {
+  flex: 0 0 100%;                                 /* cada foto ocupa todo el ancho de la pista */
+  height: 100%;
+  background: #111;                               /* fondo oscuro a los costados de las fotos verticales */
+  scroll-snap-align: center;
+}
+.galeria__foto img { object-fit: contain; }       /* contain = se ve la foto ENTERA sin recortar */
+.galeria__flecha {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+  width: 44px; height: 44px; border: 0; border-radius: 50%;
+  background: rgba(255, 255, 255, .9); color: var(--negro);
+  font-size: 1.8rem; line-height: 1; cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+.galeria__flecha:hover { background: var(--verde); color: var(--blanco); }
+.galeria__flecha--prev { left: .6rem; }
+.galeria__flecha--next { right: .6rem; }
+.galeria__contador {
+  position: absolute; right: .8rem; bottom: .8rem; z-index: 3; margin: 0;
+  padding: .15rem .7rem; border-radius: 99px; font-size: .85rem;
+  background: rgba(0, 0, 0, .6); color: var(--blanco);
 }
 
 /* ---------- ANIMACIONES ---------- */
@@ -287,6 +364,7 @@ a { color: inherit; }                     /* los enlaces heredan el color del te
 /* ---------- TABLET ---------- */
 @media (max-width: 1000px) {
   .comodidades { grid-template-columns: repeat(2, 1fr); }  /* 2 columnas */
+  .tarjetas { grid-template-columns: repeat(2, 1fr); max-width: 760px; }  /* 4 cabañas → 2x2 */
   .menu a { padding: 1rem 1.2rem; }
 }
 
@@ -311,13 +389,15 @@ a { color: inherit; }                     /* los enlaces heredan el color del te
   .menu a { padding: 1rem 1.5rem; border-top: 1px solid #eee; }
 
   .hero__velo { inset: 0; background: rgba(0, 0, 0, .55); }  /* en celular el velo cubre todo */
-  .nosotros, .contacto { grid-template-columns: 1fr; }        /* una sola columna */
+  .nosotros__interior, .contacto { grid-template-columns: 1fr; }  /* una sola columna */
   .nosotros__imagen { justify-self: center; margin-top: 2rem; max-width: 420px; }
-  .tarjetas { grid-template-columns: 1fr; max-width: 520px; }
 }
 
 @media (max-width: 520px) {
   .comodidades { grid-template-columns: 1fr; }   /* 1 columna en celulares chicos */
-  .nosotros { padding: 4rem 1rem; }
+  .tarjetas { grid-template-columns: 1fr; max-width: 420px; }
+  .modal { padding: 1rem; }
+  .galeria__flecha { width: 38px; height: 38px; }
+  .nosotros__interior { padding: 4rem 1rem; }
   .nosotros__texto h2::before { width: 40px; }
 }

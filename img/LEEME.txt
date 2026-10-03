@@ -1,11 +1,18 @@
-Poné acá las fotos con ESTOS nombres exactos (jpg):
+FOTOS DEL SITIO (jpg, nombres exactos)
 
-hero.jpg      -> foto grande de la portada (cabaña entre los árboles)
-nosotros.jpg  -> el muelle (sección "Quiénes somos")
-frase.jpg     -> foto de fondo de la frase (la de las reposeras)
-cabana1.jpg   -> Cabaña 1
-cabana2.jpg   -> Cabaña 2
-cabana3.jpg   -> Cabaña 3
+hero.jpg       -> portada (el predio)
+nosotros.jpg   -> el dueño (cuadrado de adelante en "¿Quiénes somos?")
+lancha.jpg     -> lancha navegando (cuadrado de atrás en "¿Quiénes somos?")
+textura.jpg    -> textura verde de fondo de "¿Quiénes somos?"
+fondo2.jpg     -> fondo de la frase "Si buscás un espacio tranquilo..."
+delta.jpg      -> vista aérea de fondo de "Cabañas & Servicios"
+cabana1-1.jpg, cabana2-1.jpg, cabana3-1.jpg -> fotos de las cabañas 1, 2 y 3
 
-Consejo: achicalas antes de subirlas (ancho máx. 1600 px, menos de 300 KB cada una),
-así la página carga rápido. Si una foto no está, se ve un recuadro verde con su nombre.
+Falta:
+cabana4-1.jpg  -> Cabaña 4
+
+Para sumar más fotos a una cabaña: guardalas como cabana1-2.jpg, cabana1-3.jpg, etc.
+y agregá cada nombre a la lista "fotos" de esa cabaña en js/main.js.
+
+Consejo: ancho máx. 1600 px y menos de 300 KB por foto, así la página carga rápido.
+Si una foto no está, se ve un recuadro verde con su nombre.
